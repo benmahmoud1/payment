@@ -1,0 +1,19 @@
+server:
+  port: 8082
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 10
+      properties:
+        spring.json.trusted.packages: "*"
+    listener:
+      ack-mode: manual
+      retry:
+        max-attempts: 3
+        interval: 1000  # Intervalle entre les tentatives en millisecondes
+      dlt:
+        publish-on-failure: true  # Envoyer les messages non traités à un Dead Letter Topic
